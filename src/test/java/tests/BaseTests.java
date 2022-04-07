@@ -1,12 +1,15 @@
-package tests.base;
+package tests;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.HomePage;
+import pages.TopBar;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,8 +17,12 @@ import java.util.Properties;
 
 public class BaseTests {
     protected static WebDriver driver;
-    protected static HomePage homePage;
-    @BeforeClass
+    protected static TopBar topBar;
+    private static String baseUrl = "";
+    protected static String getMainUrl() {
+        return System.getProperty("site.url");
+    }
+    @BeforeAll
     public static void setUp(){
         Properties props = System.getProperties();
         try {
@@ -26,15 +33,15 @@ public class BaseTests {
         }
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
-        driver.get(System.getProperty("site.url"));
-        homePage = new HomePage(driver);
+        driver.get(getMainUrl());
+        topBar = new TopBar(driver);
     }
-    @AfterClass
+    @AfterAll
     public static void tearDown(){
         driver.quit();
     }
     @BeforeEach
     public void goHome(){
-        driver.get(System.getProperty("site.url"));
+        driver.get(getMainUrl());
     }
 }
