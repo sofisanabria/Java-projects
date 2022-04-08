@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import pages.HomePage;
 import pages.TopBar;
 
@@ -31,8 +32,9 @@ public class BaseTests {
             e.printStackTrace();
             System.exit(-1);
         }
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+        WebDriverManager.edgedriver().setup();
+        driver = new EdgeDriver();
+        driver.manage().window().maximize();
         driver.get(getMainUrl());
         topBar = new TopBar(driver);
     }

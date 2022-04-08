@@ -9,6 +9,7 @@ import java.util.List;
 
 public class CartPage extends BasePage{
     public final By products = By.cssSelector("div.table-responsive td.text-left a");
+    public final By remove = By.xpath("//button[@data-original-title='Remove']");
     public CartPage(WebDriver driver) {
         super(driver);
     }
@@ -19,5 +20,8 @@ public class CartPage extends BasePage{
         List<String> names = new ArrayList<String>();
         getProducts().forEach(x -> names.add(x.getText()));
         return names;
+    }
+    public void removeAll(){
+        driver.findElements(remove).forEach(WebElement::click);
     }
 }

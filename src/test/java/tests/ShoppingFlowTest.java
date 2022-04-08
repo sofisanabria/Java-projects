@@ -2,6 +2,7 @@ package tests;
 
 import dataproviders.DataProvider;
 import org.hamcrest.MatcherAssert;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import pages.*;
 
@@ -14,6 +15,13 @@ import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ShoppingFlowTest extends BaseTests {
+    @AfterEach
+    public void Reset(){
+        WishListPage wishPage = topBar.goToWishList();
+        wishPage.removeAll();
+        CartPage cartPage = topBar.goToCart();
+        cartPage.removeAll();
+    }
     @Test
     public void ShopTest() {
         String[] credentials = DataProvider.UsersList().get(0);

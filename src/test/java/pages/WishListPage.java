@@ -10,6 +10,7 @@ import java.util.List;
 public class WishListPage extends BasePage{
     public final By products = By.cssSelector("div.table-responsive td.text-left a");
     public final By addToCart = By.xpath("//button[@data-original-title='Add to Cart']");
+    public final By remove = By.xpath("//button[@data-original-title='Remove']");
     public WishListPage(WebDriver driver) {
         super(driver);
     }
@@ -23,5 +24,8 @@ public class WishListPage extends BasePage{
     }
     public void addAllToCart(){
         driver.findElements(addToCart).forEach(WebElement::click);
+    }
+    public void removeAll(){
+        driver.findElements(remove).forEach(WebElement::click);
     }
 }
