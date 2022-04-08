@@ -11,7 +11,7 @@ public class LoginTests extends BaseTests {
     @ParameterizedTest
     @CsvFileSource(files = {"resources/userCredentials.csv"}, numLinesToSkip = 1)
     void successfulLogin(String email, String password) {
-        LoginPage loginPage = topBar.clickLoginLink();
+        LoginPage loginPage = topBar.goToLoginPage();
         loginPage.fillCredentials(email, password);
         loginPage.clickLoginButton();
     }

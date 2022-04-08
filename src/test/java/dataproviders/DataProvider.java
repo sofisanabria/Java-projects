@@ -26,12 +26,27 @@ public class DataProvider {
         }
         return testCases.iterator();
     }
-    public static List<String[]> Products() {
+
+    public static List<String[]> ProductsList() {
+        return ReadCSV("products.csv");
+    }
+
+    public static List<String> ProductsNames() {
+        List<String> names = new ArrayList<String>();
+        ProductsList().forEach(x -> names.add(x[1]));
+        return names;
+    }
+
+    public static List<String[]> UsersList() {
+        return ReadCSV("userCredentials.csv");
+    }
+
+    public static List<String[]> ReadCSV(String csvName) {
         List<String[]> testCases = new ArrayList<>();
         String[] data = null;
         String cvsSplitBy = ";";
         try {
-            Scanner scanner = new Scanner(new File("resources/products.csv"));
+            Scanner scanner = new Scanner(new File(String.format("resources/%s", csvName)));
             while (scanner.hasNextLine()) {
                 data = scanner.nextLine().split(cvsSplitBy);
                 testCases.add(data);
